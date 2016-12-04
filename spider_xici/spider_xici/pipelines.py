@@ -11,12 +11,12 @@ import MySQLdb
 class SpiderXiciPipeline(object):
     def process_item(self, item, spider):
 
-    	DBKWARGS = spider.setting.get('DBKWARGS')
+    	DBKWARGS = spider.settings.get('DBKWARGS')
 
     	con = MySQLdb.connect(**DBKWARGS)
     	cur = con.cursor()
 
-    	sql  = ("INSERT INTO proxy(IP,PORT, TYPE, POSITION, SPEED, LAST_CHECK_TIME) "
+    	sql  = ("INSERT INTO xici_ip(IP,PORT, TYPE, POSITION, SPEED, LAST_CHECK_TIME) "
     		"VALUES(%s, %s, %s, %s, %s, %s)")
 
     	lis = (item['IP'], item['PORT'], item['TYPE'], item['POSITION'], item['SPEED'], 
